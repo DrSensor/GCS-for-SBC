@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/object">
+        <file>logo.png</file>
+    </qresource>
+    <qresource prefix="/background">
+        <file>kampung halaman.jpg</file>
+    </qresource>
+</RCC>

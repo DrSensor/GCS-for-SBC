@@ -16,7 +16,7 @@ OpenCVProcess::OpenCVProcess(QObject *parent) :
 void OpenCVProcess::initialize(int n)
 {
     cv_cap.open(n);
-    cv_cap.set(CV_CAP_PROP_CONVERT_RGB, 1);
+//    cv_cap.set(CV_CAP_PROP_CONVERT_RGB, 1);
     if ( !cv_cap.isOpened() ) cout << "can't open camera" << endl;
 }
 
@@ -34,12 +34,19 @@ void OpenCVProcess::run()
         process(cv_frame);
 
         emit processDone(cv_frame);
+        emit processDone();
     }
 
     if (path_existed) {
         process(cv_frame);
         emit processDone(cv_frame);
+        emit processDone();
     }
+}
+
+cv::Mat OpenCVProcess::getMat() const
+{
+    return cv_frame;
 }
 
 void OpenCVProcess::process(Mat &cv_frame)

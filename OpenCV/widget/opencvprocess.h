@@ -15,6 +15,7 @@ public:
     void initialize(int n);
     void initialize(QString path);
     void run();
+    cv::Mat getMat() const;
 
 private:
     cv::Mat cv_frame;
@@ -26,6 +27,7 @@ private:
 
 signals:
     void processDone( const cv::Mat &);
+    bool processDone();
 
 public slots:
     bool selectAreaRect( const QPoint &p1, const QPoint &p2);

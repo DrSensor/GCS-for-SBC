@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,8 +16,13 @@ LIBS += -lGLU -lopencv_core -lopencv_highgui -lopencv_imgproc
 
 SOURCES += main.cpp \
     opencvwidget.cpp \
-    opencvprocess.cpp
+    opencvprocess.cpp \
+    camshift.cpp
 
 HEADERS += \
     opencvwidget.h \
-    opencvprocess.h
+    opencvprocess.h \
+    camshift.h
+
+FORMS += \
+    camshift.ui

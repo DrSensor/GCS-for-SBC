@@ -1,16 +1,16 @@
 #include "opencvwidget.h"
 
-#include <iostream>
+#include <opencv2/highgui/highgui.hpp>
 #include <GL/glu.h>
+#include <QDebug>
 
 OpenCVWidget::OpenCVWidget(QWidget *parent) :
-    QGLWidget(parent)
+    QGLWidget(QGLFormat(QGL::SampleBuffers), parent)
 {
     _width = 0;
     _height = 0;
     _texture = 0;
     select_object = false;
-    select_done = false;
 }
 
 OpenCVWidget::~OpenCVWidget()
@@ -59,7 +59,7 @@ void OpenCVWidget::paintGL()
 
     if (glGetError() != GL_NO_ERROR)
     {
-        std::cout << "GLWidget::paintGL: !!! Failed glTexImage2D" << std::endl;
+        qDebug() << "GLWidget::paintGL: !!! Failed glTexImage2D" << endl;
     }
 
     // Draw a 2D face with texture
@@ -85,7 +85,8 @@ void OpenCVWidget::resizeGL(int width, int height)
     glLoadIdentity();             // Reset the projection matrix
     //    gluOrtho2D(0, width, 0, height); // set origin to bottom left corner
 
-    gluPerspective(53, 1, 1.0, 50.0);
+    gluPerspective(53, 1, _imgRatio, 50.0);
+//    maintainAspectRatio(width, height);
 
     emit imageSizeChanged( width, height );
 
@@ -99,92 +100,42 @@ void OpenCVWidget::resizeGL(int width, int height)
 
 void OpenCVWidget::mouseMoveEvent(QMouseEvent *mouse)
 {
-    cv::Point origin;
     cv::Point mouse_in_pixel;
 
     {
-        mouse_in_pixel.x = cv_frame.cols*mouse->x()/_width;
+        mouse_in_pixel.x = cv_frame.cols - cv_frame.cols*mouse->x()/_width;
         mouse_in_pixel.y = cv_frame.rows*mouse->y()/_height;
     }
 
+
     if (select_object) {
-        selection.x = MIN(mouse_in_pixel.x, origin.x);
-        selection.y = MIN(mouse_in_pixel.y, origin.y);
-        selection.width = std::abs(mouse_in_pixel.x - origin.x);
-        selection.height = std::abs(mouse_in_pixel.y - origin.y);
-
-        selection &= cv::Rect(0, 0, cv_frame.cols, cv_frame.rows);
+        qDebug() << "Mouse Select Pos : " << mouse_in_pixel.x << ", " << mouse_in_pixel.y << endl;
+        if ( (mouse_in_pixel.x > 0 && mouse_in_pixel.x < cv_frame.cols)
+                && (mouse_in_pixel.y > 0 && mouse_in_pixel.y < cv_frame.rows))
+            selection = cv::Rect(origin, mouse_in_pixel);
     }
 }
-
-/*
-void OpenCVWidget::mouseMoveEvent(QMouseEvent *mouse)
-{
-    static bool left_select = false, right_select = false;
-    static bool left_once = true, right_once = true;
-    QPoint left_pressed, right_pressed;
-    QPoint left_released, right_released;
-
-    if (mouse->button() == Qt::LeftButton) {
-        emit leftMouseButtonPressed(mouse->pos());
-
-        left_select = true;
-        if (left_once) {
-            left_pressed = mouse->pos();
-            left_once = false;
-        }
-    }
-    if (mouse->button() == Qt::RightButton) {
-        emit rightMouseButtonPressed( mouse->pos() );
-
-        right_select = true;
-        if (right_once) {
-            right_pressed = mouse->pos();
-            right_once = false;
-        }
-    }
-
-    if ( mouse->button() == Qt::NoButton ) {
-        emit cursorHover( mouse->pos() );
-        if (left_select) {
-            left_released = mouse->pos();
-            left_select = false;
-
-            emit leftMouseButtonSelectArea( left_pressed, left_released );
-        }
-        if (right_select) {
-            right_released = mouse->pos();
-            right_select = false;
-
-            emit rightMouseButtonSelectArea( right_pressed, right_released);
-        }
-        left_once = right_once = true;
-    }
-}
-*/
 
 void OpenCVWidget::mousePressEvent(QMouseEvent *mouse)
 {
-    cv::Point origin;
     cv::Point mouse_in_pixel;
 
     {
-        mouse_in_pixel.x = cv_frame.cols*mouse->x()/_width;
+        mouse_in_pixel.x = cv_frame.cols - cv_frame.cols*mouse->x()/_width;
         mouse_in_pixel.y = cv_frame.rows*mouse->y()/_height;
     }
 
-    if (mouse->button() == Qt::LeftButton && !select_object) {
-        selection = cv::Rect(mouse_in_pixel, cv::Point(0, 0));
+    if (mouse->button() == Qt::LeftButton) {
         origin = mouse_in_pixel;
         select_object = true;
+        selection = cv::Rect();
     }
 }
 
 void OpenCVWidget::mouseReleaseEvent(QMouseEvent *mouse)
 {
-    if( selection.width > 0 && selection.height > 0 )
-        select_done = true;
-    select_object = false;
+    if (mouse->button() == Qt::LeftButton)
+        select_object = false;
 }
 
 void OpenCVWidget::maintainAspectRatio(int width, int height)
@@ -203,8 +154,11 @@ bool OpenCVWidget::showImage(const cv::Mat &image)
 
     if (this->isVisible()) {
         cv_frame = image;
+        _imgRatio = (float) cv_frame.cols / (float) cv_frame.rows;
         if( select_object && selection.width > 0 && selection.height > 0 )
         {
+            qDebug() << "Selection Pos (x1,y1) : " << selection.x << ", " << selection.y << endl;
+//            qDebug() << "Selection Size (x2,y2) : " << selection.x+selection.width << ", " << selection.y+selection.height << endl;
             roi = cv::Mat(cv_frame, selection);
             bitwise_not(roi, roi);
         }

@@ -28,8 +28,8 @@ private:
     int _height;
     double _imgRatio;
     bool select_object;
-    bool select_done;
     cv::Rect selection;
+    cv::Point origin;
     cv::Mat cv_frame;
     cv::Mat roi;
     GLuint _texture;

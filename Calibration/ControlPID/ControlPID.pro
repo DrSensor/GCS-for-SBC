@@ -13,10 +13,12 @@ TEMPLATE = app
 TARGET = ControlPID
 
 SOURCES += main.cpp \
-    controlpid.cpp
+    controlpid.cpp \
+    ../../AddOn/qcustomplot.cpp
 
 HEADERS += \
-    controlpid.h
+    controlpid.h \
+    ../../AddOn/qcustomplot.h
 
 FORMS += \
     controlpid.ui

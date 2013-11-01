@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     Streaming \
-#    AHRS \
+    AHRS \
     SLAM \
     Navigation \
     EFIS \

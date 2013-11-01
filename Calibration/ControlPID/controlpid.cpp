@@ -26,6 +26,9 @@ void ControlPID::PIDupdatedSlider()
     ui->P_spinBox->setValue(ui->P_slider->value());
     ui->I_spinBox->setValue(ui->I_slider->value());
     ui->D_spinBox->setValue(ui->D_slider->value());
+
+    P = ui->P_spinBox->value(); I = ui->I_spinBox->value(); D = ui->D_spinBox->value();
+    emit PIDchanged(P, I, D);
 }
 
 void ControlPID::PIDupdatedSpinBox()
@@ -33,4 +36,15 @@ void ControlPID::PIDupdatedSpinBox()
     ui->P_slider->setValue(ui->P_spinBox->value());
     ui->I_slider->setValue(ui->I_spinBox->value());
     ui->D_slider->setValue(ui->D_spinBox->value());
+
+    P = ui->P_spinBox->value(); I = ui->I_spinBox->value(); D = ui->D_spinBox->value();
+    emit PIDchanged(P, I, D);
+}
+
+void ControlPID::setErrorPlot(const double &)
+{
+}
+
+void ControlPID::setValuePlot(const double &)
+{
 }

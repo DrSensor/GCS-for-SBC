@@ -13,9 +13,11 @@ TEMPLATE = app
 TARGET = AHRS
 
 SOURCES += main.cpp \
+    ../AddOn/qcustomplot.cpp \
     ahrs.cpp
 
 HEADERS += \
+    ../AddOn/qcustomplot.h \
     ahrs.h
 
 FORMS += \

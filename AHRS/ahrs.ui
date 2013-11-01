@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AHRS</class>
+ <widget class="QWidget" name="AHRS">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>464</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QCustomPlot" name="plot" native="true"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="pitch">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 255);</string>
+         </property>
+         <property name="text">
+          <string>PITCH</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLCDNumber" name="pitchNum">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 255);</string>
+         </property>
+         <property name="digitCount">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="roll">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 32, 32);</string>
+         </property>
+         <property name="text">
+          <string>ROLL</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLCDNumber" name="rollNum">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 0, 0);</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="yaw">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(23, 255, 19);</string>
+         </property>
+         <property name="text">
+          <string>YAW</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLCDNumber" name="yawNum">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(43, 255, 32);</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QWidget" name="view3d" native="true"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>../AddOn/qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

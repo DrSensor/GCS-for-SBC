@@ -12,6 +12,9 @@ TEMPLATE = app
 
 TARGET = AHRS
 
+INCLUDEPATH += \
+    ../
+
 SOURCES += main.cpp \
     ../AddOn/qcustomplot.cpp \
     ahrs.cpp

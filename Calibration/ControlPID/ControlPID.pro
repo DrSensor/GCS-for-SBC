@@ -12,6 +12,9 @@ TEMPLATE = app
 
 TARGET = ControlPID
 
+INCLUDEPATH += \
+    ../../
+
 SOURCES += main.cpp \
     controlpid.cpp \
     ../../AddOn/qcustomplot.cpp

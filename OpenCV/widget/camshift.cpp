@@ -19,8 +19,7 @@ CamShift::CamShift(QWidget *parent) :
     task->initialize(0);
 
 //    connect(task, SIGNAL(processDone(cv::Mat)), cam, SLOT(showImage(cv::Mat)));
-    connect(task, SIGNAL(processDone(cv::Mat)), ui->widget, SLOT(showImage(cv::Mat)));
-
+    connect(task, SIGNAL(processDone(cv::Mat)), ui->image, SLOT(showImage(cv::Mat)));
     QThreadPool::globalInstance()->start(task);
 
 //    ui->formLayout->addWidget(cam);

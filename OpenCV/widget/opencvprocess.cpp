@@ -32,6 +32,7 @@ void OpenCVProcess::run()
         cv_cap >> cv_frame;
 
         process(cv_frame);
+        cvtColor(cv_frame, cv_frame, CV_BGR2RGB);
 
         emit processDone(cv_frame);
         emit processDone();
@@ -46,13 +47,16 @@ void OpenCVProcess::run()
 
 cv::Mat OpenCVProcess::getMat() const
 {
+
     return cv_frame;
 }
 
 void OpenCVProcess::process(Mat &cv_frame)
 {
     // insert code for image processing here
-    cvtColor(cv_frame, cv_frame, CV_BGR2RGB);
+    cvtColor(cv_frame, cv_frame, CV_BGR2HSV);
+
+
 }
 
 bool OpenCVProcess::selectAreaRect( const QPoint &p1, const QPoint &p2)

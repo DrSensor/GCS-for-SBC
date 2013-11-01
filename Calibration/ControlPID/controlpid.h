@@ -17,6 +17,13 @@ public:
     
 private:
     Ui::ControlPID *ui;
+
+public slots:
+    void PIDupdatedSlider();
+    void PIDupdatedSpinBox();
+
+signals:
+    void PIDchanged();
 };
 
 #endif // CONTROLPID_H

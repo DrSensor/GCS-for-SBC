@@ -1,5 +1,7 @@
 TEMPLATE = subdirs
 
+#TODO : Class for TCP/IP Socket
+
 SUBDIRS += \
     Streaming \
     AHRS \
@@ -8,4 +10,5 @@ SUBDIRS += \
     EFIS \
     Calibration \
     main \
-    OpenCV
+    OpenCV \
+    Connection

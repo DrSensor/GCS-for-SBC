@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "streaming.h"
+#include "connectiondialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +19,8 @@ public:
     
 private:
     Ui::MainWindow *ui;
+
+    ConnectionDialog *connectDialog;
 };
 
 #endif // MAINWINDOW_H

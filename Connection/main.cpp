@@ -1,10 +1,11 @@
 #include <QApplication>
-#include "e.h"
+#include "connectiondialog.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Navigation w;
+    
+    ConnectionDialog w;
     w.show();
 
     return a.exec();

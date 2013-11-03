@@ -20,9 +20,36 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuConnect">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionConnect"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuConnect"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,12 +60,57 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="QDockWidget" name="streamingDocks">
+   <property name="windowTitle">
+    <string>Streaming</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="Streaming" name="dockWidgetContents"/>
+   <widget class="Streaming" name="streamingWidget"/>
   </widget>
+  <widget class="QDockWidget" name="AHRSDocks">
+   <property name="windowTitle">
+    <string>AHRS</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>4</number>
+   </attribute>
+   <widget class="AHRS" name="ahrsWidget"/>
+  </widget>
+  <widget class="QDockWidget" name="navigationDocks">
+   <property name="windowTitle">
+    <string>Navigation</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="Navigation" name="navigationWidget"/>
+  </widget>
+  <widget class="QDockWidget" name="PIDDocks">
+   <property name="windowTitle">
+    <string>PID</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="ControlPID" name="PIDWidget"/>
+  </widget>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -46,6 +118,24 @@
    <class>Streaming</class>
    <extends>QWidget</extends>
    <header location="global">streaming.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AHRS</class>
+   <extends>QWidget</extends>
+   <header location="global">ahrs.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Navigation</class>
+   <extends>QWidget</extends>
+   <header location="global">navigation.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControlPID</class>
+   <extends>QWidget</extends>
+   <header location="global">controlpid.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

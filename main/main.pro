@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,14 +14,34 @@ TEMPLATE = app
 LIBS += -lvlc-qt -lvlc-qt-widgets
 
 INCLUDEPATH += \
-../Streaming/
+../ \
+../Streaming/ \
+../Calibration/ControlPID \
+../AHRS \
+../Navigation \
+../Connection
+
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    ../Streaming/streaming.cpp
+    ../Streaming/streaming.cpp \
+    ../Calibration/ControlPID/controlpid.cpp \
+    ../AHRS/ahrs.cpp \
+    ../Navigation/navigation.cpp \
+    ../Connection/connectiondialog.cpp \
+    ../AddOn/qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
-    ../Streaming/streaming.h
+    ../Streaming/streaming.h \
+    ../Calibration/ControlPID/controlpid.h \
+    ../AHRS/ahrs.h \
+    ../Navigation/navigation.h \
+    ../Connection/GCS_SBC_Data.h \
+    ../Connection/connectiondialog.h \
+    ../AddOn/qcustomplot.h
 
 FORMS    += mainwindow.ui \
-    ../Streaming/streaming.ui
+    ../Streaming/streaming.ui \
+    ../Calibration/ControlPID/controlpid.ui \
+    ../AHRS/ahrs.ui \
+    ../Navigation/navigation.ui

@@ -14,6 +14,8 @@ Streaming::Streaming(QWidget *parent) :
     _player->setVideoWidget(ui->video);
 
     ui->video->setMediaPlayer(_player);
+    ui->volume->setVolume(50);
+    ui->volume->setOrientation(Qt::Horizontal);
 
     connect(ui->url_edit, SIGNAL(returnPressed()), this, SLOT(openUrl()));
 }

@@ -82,15 +82,12 @@
     </widget>
    </item>
    <item>
-    <widget class="QSlider" name="horizontalSlider">
+    <widget class="VlcWidgetVolumeSlider" name="volume" native="true">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>24</height>
+       <height>30</height>
       </size>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -158,6 +155,12 @@
     <signal>fullscreen()</signal>
     <slot>toggleFullscreen()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>VlcWidgetVolumeSlider</class>
+   <extends>QWidget</extends>
+   <header>vlc-qt/WidgetVolumeSlider.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

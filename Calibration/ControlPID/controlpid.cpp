@@ -70,9 +70,9 @@ void ControlPID::PIDupdatedSlider()
 
 void ControlPID::PIDupdatedSpinBox()
 {
-    ui->P_slider->setValue(ui->P_spinBox->value());
-    ui->I_slider->setValue(ui->I_spinBox->value());
-    ui->D_slider->setValue(ui->D_spinBox->value());
+    ui->P_slider->setSliderPosition(ui->P_spinBox->value());
+    ui->I_slider->setSliderPosition(ui->I_spinBox->value());
+    ui->D_slider->setSliderPosition(ui->D_spinBox->value());
 
     P = ui->P_spinBox->value(); I = ui->I_spinBox->value(); D = ui->D_spinBox->value();
     emit PIDchanged(P, I, D);
